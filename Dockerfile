@@ -1,4 +1,4 @@
-FROM ptp-base:latest
+FROM my-jessie:latest
 MAINTAINER Jamie McClelland <jamie@mayfirst.org>
 
 # rsyslog is not going to run by default, but useful to have (along with bsd-mailx

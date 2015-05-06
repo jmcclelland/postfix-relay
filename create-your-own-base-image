@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+# Run as root to create your own base image. Why? Because pulling unverified
+# software from the Internet is a bad idea, especially when it is this easy to
+# make your own. 
+#
+# Debian developers have worked hard to ensure a reliable and secure operating
+# system. Use it!
+
+temp=$(mktemp -d)
+printf "Running debootstrap.\n"
+debootstrap --variant=minbase jessie "$temp" http://mirror.cc.columbia.edu/debian
+printf "Importing into docker.\n"
+cd "$temp" && tar -c . | docker import - my-jessie 
+cd
+printf "Removing temp directory.\n"
+rm -rf "$temp"
